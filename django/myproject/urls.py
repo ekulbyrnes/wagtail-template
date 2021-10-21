@@ -25,12 +25,11 @@ from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 urlpatterns = [
-    ...
     path('admin/', admin.site.urls),
     # Add this to set up authentication for REST framework
     #path('api-auth/', include('rest_framework.urls')),
     path('cms/', include(wagtailadmin_urls)),
-    path('documents/' include(wagtaildocs_urls)),
+    path('documents/', include(wagtaildocs_urls)),
     path('pages/', include(wagtail_urls)),
     # wagtail_urls is the base location from where the pages of your Wagtail site will be served.
     # In the above example, Wagtail will handle URLs under /pages/, leaving the root URL and
@@ -40,8 +39,6 @@ urlpatterns = [
     # re_path(r'', include(wagtail_urls)),
     # ^ In this case, this should be placed at the end of the urlpatterns list,
     # so that it does not override more specific URL patterns.
-
-    ...
 ]
 
 from django.conf import settings
@@ -51,3 +48,4 @@ urlpatterns = [
     # ... the rest of your URL config goes here ...
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+w
