@@ -78,6 +78,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
 ROOT_URLCONF = 'myproject.urls'
@@ -156,13 +157,69 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+#? Does this need to be updated?? 
+# >> 'Add a STATIC_ROOT setting if your project does not aready have one:
+# $ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_ROOT = '/static/'
+
+#? How to create a media volume - check @mattcen's repo and compare the docker-compose files.
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+#                               #
+### WAGTAIL-specific SETTINGS ###
+#                               #
+
+# Add a WAGTAIL_SITE_NAME to be displayed on the dashboard
+WAGTAIL_SITE_NAME = env("WAGTAIL_SITE_NAME")
+
+# Don't add a trailing slash to Wagtail-served URLs
+WAGTAIL_APPEND_SLASH = False
+
+# Allow responsive HTML embedding
+WAGTAILEMBEDS_RESPONSIVE_HTML = True
+
+# Set recent edits on Wagtail Dashboard
+# WAGTAILADMIN_RECENT_EDITS_LIMIT = 5
+
+# Allow extended login form with extra fields
+# WAGTAILADMIN_USER_LOGIN_FORM = 'users.forms.LoginForm'
+
+# Wagtail gravatar provider
+# WAGTAIL_GRAVATAR_PROVIDER_URL = '//www.garvatar.com/avatar'
+
+# Changes whether the 'Submit for Moderation' button is displayed in the action menu
+WAGTAIL_MODERATION_ENABLED = True
+
+# Set whether commenting is enabled for pages (true by defauld)
+# Disables commenting when false
+WAGTAILADMIN_COMMENTS_ENABLED = False
+
+# Use your own image model in wagtail, extending the 'AbstractImage' class
+# WAGTAILIMAGES_IMAGE_MODEL = 'myapp.MyImage'
+
+# ... and provide your own image base
+# WAGTAILIMAGES_IMAGE_FORM_BASE = 'myapp.forms.MyImageBaseForm'
+
+# Set max image upload size
+# WAGTAILIMAGES_MAX_UPLOAD_SIZE = 20 * 1024 * 1024 # i.e. 20MB
+
+# Specify the number of images per page shown on the main Images listing in the Wagtail Admin
+# WAGTAILIMAGES_INDEX_PAGE_SIZE = 20
+
+# Specify the number of items per page shown when viewing an images useage
+# WAGTAILIMAGES_USAGE_PAGE_SIZE = 20
+
+# Specify the number of images shown per page in the image chooser modal
+WAGTAILIMAGES_CHOOSER_PAGE_SIZE = 12
+
+#! Sort out the rest of the settings and drop them in here:
+# https://docs.wagtail.io/en/stable/reference/settings.html
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 BOOTSTRAP4 = {
     'include_jquery': True
